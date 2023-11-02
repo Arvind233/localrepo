@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Picker, Radio, CheckBox, DatePicker } from 'react-native';
+import { View, Text, TextInput, Button } from 'react-native';
+import CheckBox from 'react-native-checkbox-list'; // Make sure to install the library
 
 const RegisterScreen = ({ navigation }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
-  const [gender, setGender] = useState('male');
   const [hobbies, setHobbies] = useState([]);
 
   const handleCheckBox = (hobby) => {
@@ -18,11 +17,37 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   const styles = {
-    // Define your styles here
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: 20,
+    },
+    input: {
+      width: '100%',
+      height: 40,
+      borderColor: 'gray',
+      borderWidth: 1,
+      marginBottom: 10,
+      paddingHorizontal: 10,
+    },
+    checkboxContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 10,
+    },
+    checkboxText: {
+      marginLeft: 10,
+    },
+    button: {
+      width: '100%',
+      backgroundColor: 'blue',
+      color: 'white',
+    },
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text>First Name</Text>
       <TextInput
         style={styles.input}
@@ -44,45 +69,58 @@ const RegisterScreen = ({ navigation }) => {
         onChangeText={(text) => setEmail(text)}
       />
 
-      <Text>Date of Birth</Text>
-      <DatePicker
-        style={styles.input}
-        date={dateOfBirth}
-        onDateChange={(date) => setDateOfBirth(date)}
-      />
-
-      <Text>Gender</Text>
-      <Picker
-        selectedValue={gender}
-        style={styles.input}
-        onValueChange={(itemValue) => setGender(itemValue)}
-      >
-        <Picker.Item label="Male" value="male" />
-        <Picker.Item label="Female" value="female" />
-      </Picker>
-
       <Text>Hobbies</Text>
       <View style={styles.checkboxContainer}>
         <CheckBox
-          value={hobbies.includes('Reading')}
-          onValueChange={() => handleCheckBox('Reading')}
+          label="Reading"
+          checked={hobbies.includes('Reading')}
+          onPress={() => handleCheckBox('Reading')}
         />
-        <Text>Reading</Text>
+        <Text style={styles.checkboxText}>Reading</Text>
       </View>
       <View style={styles.checkboxContainer}>
         <CheckBox
-          value={hobbies.includes('Sports')}
-          onValueChange={() => handleCheckBox('Sports')}
+          label="Sports"
+          checked={hobbies.includes('Sports')}
+          onPress={() => handleCheckBox('Sports')}
         />
-        <Text>Sports</Text>
-      />
-      {/* Add more hobbies as needed */}
+        <Text style={styles.checkboxText}>Sports</Text>
+      </View>
+      <View style={styles.checkboxContainer}>
+        <CheckBox
+          label="Singing"
+          checked={hobbies.includes('Singing')}
+          onPress={() => handleCheckBox('Singing')}
+        />
+        <Text style={styles.checkboxText}>Singing</Text>
+      </View>
+      <View style={styles.checkboxContainer}>
+        <CheckBox
+          label="Dancing"
+          checked={hobbies.includes('Dancing')}
+          onPress={() => handleCheckBox('Dancing')}
+        />
+        <Text style={styles.checkboxText}>Dancing</Text>
+      </View>
+      <View style={styles.checkboxContainer}>
+        <CheckBox
+          label="Traveling"
+          checked={hobbies.includes('Traveling')}
+          onPress={() => handleCheckBox('Traveling')}
+        />
+        <Text style={styles.checkboxText}>Traveling</Text>
       </View>
 
-      {/* Add a Register button to navigate to the Home Screen */}
+      <Button
+        title="Register"
+        onPress={() => {
+          // Handle registration logic here
+          // You can navigate to the Home Screen upon successful registration
+        }}
+        style={styles.button}
+      />
     </View>
   );
 };
 
 export default RegisterScreen;
-          
